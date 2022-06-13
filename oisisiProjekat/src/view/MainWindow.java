@@ -24,6 +24,9 @@ public class MainWindow extends JFrame{
 		
 		MenuBar menu = new MenuBar();
 		setJMenuBar(menu);
+		
+		StatusBar statusBar = new StatusBar();		
+		add(statusBar, BorderLayout.SOUTH);
 	
 
 	}
