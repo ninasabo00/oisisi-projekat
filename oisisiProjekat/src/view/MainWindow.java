@@ -1,4 +1,4 @@
-package View;
+package view;
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,8 +24,7 @@ public class MainWindow extends JFrame{
 		
 		MenuBar menu = new MenuBar();
 		setJMenuBar(menu);
-		
-		setVisible(true);
+	
 
 	}
 }
