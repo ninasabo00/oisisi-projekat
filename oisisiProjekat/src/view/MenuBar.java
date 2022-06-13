@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import controller.StaffController;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 public class MenuBar extends JMenuBar {
@@ -68,8 +70,27 @@ public class MenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("editDelete");		
+				if(TabbedPane.getState() == 0) {
+					try {
+						int option =JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da obrisete?","Brisanje zaposlenog?",JOptionPane.YES_NO_OPTION);
+						if(option == JOptionPane.YES_OPTION) {
+						
+							int currentRow = StaffJTable.getInstance().getSelectedRow();
+							String selectedJmbg = (String)StaffJTable.getInstance().getValueAt(currentRow, 2);
+							StaffController.getInstance().deleteStaffMember(selectedJmbg);
+						}
+					}catch (Exception exception) {
+						JOptionPane.showMessageDialog(null, "Morate selektovati nekog zaposlenog!","",JOptionPane.ERROR_MESSAGE);
+						System.out.println(exception.getMessage());	
+					}	
+
+
+				}else if(TabbedPane.getState() == 1) {
+					System.out.println("Nema jos ovog brisanja");
+				}
+				
 			}	
+				
 		});
 		edit.add(editDelete);
 		

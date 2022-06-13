@@ -3,6 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame{
+
+	private static final long serialVersionUID = 7661406785264865341L;
+	
 	private static MainWindow instance = null;
     public static MainWindow getInstance() {
         if (instance == null) {

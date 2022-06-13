@@ -22,13 +22,16 @@ public class TabbedPane extends JTabbedPane  {
 	}
 	
 	public static int state = 0;
+	public static StaffJTable staffJTable;
 	
 	public TabbedPane() {
 		
-		JLabel label = new JLabel("tabela zaposlenih");
+		//obrisati ovo kada se doda nova tabela
 		JLabel label2 = new JLabel("tabela softvera");
 		
-		JScrollPane staffScroll = new JScrollPane(label);
+		staffJTable = StaffJTable.getInstance();
+		
+		JScrollPane staffScroll = new JScrollPane(staffJTable);
 		JScrollPane softwareScroll = new JScrollPane(label2);
 
 		//TODO promeniti slike
@@ -45,7 +48,7 @@ public class TabbedPane extends JTabbedPane  {
 			public void stateChanged(ChangeEvent e) {
 
 				state = getSelectedIndex();
-				//ovde se sve azurira
+				updateStaffTable();
 			}
 		});
 		}
@@ -53,4 +56,12 @@ public class TabbedPane extends JTabbedPane  {
 	public static int getState() {
 		return state;
 	}
+	
+	public void updateStaffTable() {
+		AbstractTableStaff model = (AbstractTableStaff)staffJTable.getModel();
+		model.fireTableDataChanged();
+		validate();
+	}
+	
+	
 }
