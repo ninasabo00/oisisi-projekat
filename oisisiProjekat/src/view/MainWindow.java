@@ -25,9 +25,11 @@ public class MainWindow extends JFrame{
 		MenuBar menu = new MenuBar();
 		setJMenuBar(menu);
 		
+		TabbedPane tabbedpane = TabbedPane.getInstance();
+		add(tabbedpane, BorderLayout.CENTER);
+		
 		StatusBar statusBar = new StatusBar();		
 		add(statusBar, BorderLayout.SOUTH);
 	
-
 	}
 }

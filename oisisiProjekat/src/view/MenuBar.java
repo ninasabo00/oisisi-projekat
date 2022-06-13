@@ -84,7 +84,8 @@ public class MenuBar extends JMenuBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("helpHelp");		
+				HelpFrame helpFrame = new HelpFrame();
+				helpFrame.setVisible(true);		
 			}	
 		});
 		
