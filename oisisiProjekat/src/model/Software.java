@@ -7,12 +7,12 @@ public class Software {
     private String name;
     private List<Brush> brushes;
     private String fileFormat;
-    private List<String> animationTools;
+    private String animationTools;
     private Render render;
     
     public Software() {}
     
-	public Software(String name, List<Brush> brushes, String fileFormat, List<String> animationTools, Render render) {
+	public Software(String name, List<Brush> brushes, String fileFormat, String animationTools, Render render) {
 		super();
 		this.name = name;
 		this.brushes = brushes;
@@ -61,12 +61,12 @@ public class Software {
 	}
 
 
-	public List<String> getAnimationTools() {
+	public String getAnimationTools() {
 		return animationTools;
 	}
 
 
-	public void setAnimationTools(List<String> animationTools) {
+	public void setAnimationTools(String animationTools) {
 		this.animationTools = animationTools;
 	}
 

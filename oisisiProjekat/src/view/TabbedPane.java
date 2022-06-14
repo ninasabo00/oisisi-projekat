@@ -23,24 +23,22 @@ public class TabbedPane extends JTabbedPane  {
 	
 	public static int state = 0;
 	public static StaffJTable staffJTable;
+	public static SoftwareJTable softwareJTable;
 	
 	public TabbedPane() {
 		
-		//obrisati ovo kada se doda nova tabela
-		JLabel label2 = new JLabel("tabela softvera");
-		
 		staffJTable = StaffJTable.getInstance();
-		
+		softwareJTable = SoftwareJTable.getInstance();
 		JScrollPane staffScroll = new JScrollPane(staffJTable);
-		JScrollPane softwareScroll = new JScrollPane(label2);
+		JScrollPane softwareScroll = new JScrollPane(softwareJTable);
 
 		//TODO promeniti slike
 		ImageIcon staffIcon = new ImageIcon( "images" + File.separator + "about1.png");
 		ImageIcon softwareIcon = new ImageIcon( "images" + File.separator + "about1.png");
 		
 		
-		addTab("Studenti", staffIcon , staffScroll);
-		addTab("Profesori", softwareIcon , softwareScroll);
+		addTab("Zaposleni", staffIcon , staffScroll);
+		addTab("Softveri", softwareIcon , softwareScroll);
 		
 		addChangeListener(new ChangeListener() {
 			

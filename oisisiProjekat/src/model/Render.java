@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Render {
 
-    private List<String> materials;
-    private List<String> cameras;
-    private List<String> objects;
+    private String materials;
+    private String cameras;
+    private String objects;
     private String name;
     
     
     public Render() {}
     
-	public Render(List<String> materials, List<String> cameras, List<String> objects, String name) {
+	public Render(String materials, String cameras, String objects, String name) {
 		super();
 		this.materials = materials;
 		this.cameras = cameras;
@@ -27,32 +27,32 @@ public class Render {
 	}
 
 
-	public List<String> getMaterials() {
+	public String getMaterials() {
 		return materials;
 	}
 
 
-	public void setMaterials(List<String> materials) {
+	public void setMaterials(String materials) {
 		this.materials = materials;
 	}
 
 
-	public List<String> getCameras() {
+	public String getCameras() {
 		return cameras;
 	}
 
 
-	public void setCameras(List<String> cameras) {
+	public void setCameras(String cameras) {
 		this.cameras = cameras;
 	}
 
 
-	public List<String> getObjects() {
+	public String getObjects() {
 		return objects;
 	}
 
 
-	public void setObjects(List<String> objects) {
+	public void setObjects(String objects) {
 		this.objects = objects;
 	}
 
