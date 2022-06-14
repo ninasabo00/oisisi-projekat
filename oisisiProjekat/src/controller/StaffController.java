@@ -1,5 +1,6 @@
 package controller;
 
+import model.Staff;
 import model.StaffLogic;
 import view.TabbedPane;
 
@@ -16,6 +17,11 @@ public class StaffController {
 	
 	public void deleteStaffMember(String jmbg) {
 		StaffLogic.getInstance().deleteStaffMember(jmbg);
+		TabbedPane.getInstance().updateStaffTable();
+	}
+	
+	public void addStaff(Staff staff) {
+		StaffLogic.getInstance().addStaff(staff);
 		TabbedPane.getInstance().updateStaffTable();
 	}
 }

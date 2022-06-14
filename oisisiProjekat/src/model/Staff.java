@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Staff {
@@ -8,7 +8,7 @@ public class Staff {
 	private String name;
     private String surname;
     private String jmbg;
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     private String email;
     private Address address;
     private List<Software> softwares;
@@ -17,7 +17,7 @@ public class Staff {
     
     public Staff() {}
     
-	public Staff(String name, String surname, String jmbg, LocalDateTime dateOfBirth, String email, Address address,
+	public Staff(String name, String surname, String jmbg, LocalDate dateOfBirth, String email, Address address,
 			List<Software> softwares) {
 		super();
 		this.name = name;
@@ -30,7 +30,7 @@ public class Staff {
 	}
 	
 	//without list
-	public Staff(String name, String surname, String jmbg, LocalDateTime dateOfBirth, String email, Address address) {
+	public Staff(String name, String surname, String jmbg, LocalDate dateOfBirth, String email, Address address) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -64,11 +64,11 @@ public class Staff {
 		this.jmbg = jmbg;
 	}
 
-	public LocalDateTime getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDateTime dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

@@ -30,7 +30,12 @@ public class MenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("fileNew");		
+				if(TabbedPane.getState() == 0) {
+					AddStaffFrame addStaffFrame = new AddStaffFrame();
+					addStaffFrame.setVisible(true);
+				}else if(TabbedPane.getState() == 1) {
+
+				}		
 			}	
 		});
 		file.add(fileNew);
@@ -83,7 +88,6 @@ public class MenuBar extends JMenuBar {
 						JOptionPane.showMessageDialog(null, "Morate selektovati nekog zaposlenog!","",JOptionPane.ERROR_MESSAGE);
 						System.out.println(exception.getMessage());	
 					}	
-
 
 				}else if(TabbedPane.getState() == 1) {
 					System.out.println("Nema jos ovog brisanja");

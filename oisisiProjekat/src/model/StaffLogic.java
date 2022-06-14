@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class StaffLogic {
@@ -36,8 +36,8 @@ public class StaffLogic {
 		
 		Address address1 = new Address(1, "Dunavska", "Novi Sad");
 		Address address2 = new Address(1, "Fruskogorska", "Novi Sad");
-		Staff staff1 = new Staff("Marko", "Markovic", "123123", LocalDateTime.now(), "email@yahoo.com", address1);
-		Staff staff2 = new Staff("Pera", "Peric", "5211232", LocalDateTime.now(), "lala@gmail.com", address2);
+		Staff staff1 = new Staff("Marko", "Markovic", "123123", LocalDate.now(), "email@yahoo.com", address1);
+		Staff staff2 = new Staff("Pera", "Peric", "5211232", LocalDate.now(), "lala@gmail.com", address2);
 		staffs.add(staff1);
 		staffs.add(staff2);
 	}
@@ -97,5 +97,8 @@ public class StaffLogic {
 	}
 	//################################
 	
+	public void addStaff(Staff staff) {
+		this.staffs.add(staff);
+	}
 	
 }
