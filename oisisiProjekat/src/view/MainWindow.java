@@ -33,6 +33,9 @@ public class MainWindow extends JFrame{
 		
 		StatusBar statusBar = new StatusBar();		
 		add(statusBar, BorderLayout.SOUTH);
+		
+		Toolbar toolbar = new Toolbar();
+		add(toolbar, BorderLayout.NORTH);
 	
 	}
 }
