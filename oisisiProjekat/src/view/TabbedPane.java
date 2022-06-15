@@ -31,9 +31,8 @@ public class TabbedPane extends JTabbedPane  {
 		JScrollPane staffScroll = new JScrollPane(staffJTable);
 		JScrollPane softwareScroll = new JScrollPane(softwareJTable);
 
-		//TODO promeniti slike
-		ImageIcon staffIcon = new ImageIcon( "images" + File.separator + "about1.png");
-		ImageIcon softwareIcon = new ImageIcon( "images" + File.separator + "about1.png");
+		ImageIcon staffIcon = new ImageIcon( "images" + File.separator + "group.png");
+		ImageIcon softwareIcon = new ImageIcon( "images" + File.separator + "software.png");
 		
 		
 		addTab("Zaposleni", staffIcon , staffScroll);

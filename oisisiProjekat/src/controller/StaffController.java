@@ -33,4 +33,9 @@ public class StaffController {
 		StaffLogic.getInstance().editStaff(staff, jmbg);
 		TabbedPane.getInstance().updateStaffTable();
 	}
+	
+	public void searchStaff(String name) {
+		StaffLogic.getInstance().searchStaff(name);
+		TabbedPane.getInstance().updateStaffTable();
+	}
 }

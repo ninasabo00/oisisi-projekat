@@ -1,13 +1,17 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import controller.StaffController;
@@ -20,7 +24,7 @@ public class Toolbar extends JToolBar{
 	public Toolbar() {
 		JButton buttonNew = new JButton();
 		buttonNew.setToolTipText("New");
-		buttonNew.setIcon(new ImageIcon("images" + File.separator + "add.jpg"));
+		buttonNew.setIcon(new ImageIcon("images" + File.separator + "add.png"));
 		buttonNew.addActionListener(new ActionListener() {
 
 			@Override
@@ -36,7 +40,7 @@ public class Toolbar extends JToolBar{
 		
 		JButton buttonEdit = new JButton();
 		buttonEdit.setToolTipText("Edit");
-		buttonEdit.setIcon(new ImageIcon("images" + File.separator + "edit.jpg"));
+		buttonEdit.setIcon(new ImageIcon("images" + File.separator + "edit.png"));
 		buttonEdit.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("static-access") //brise warning
@@ -59,7 +63,7 @@ public class Toolbar extends JToolBar{
 
 		JButton buttonDelete = new JButton();
 		buttonDelete.setToolTipText("Delete");
-		buttonDelete.setIcon(new ImageIcon("images" + File.separator + "delete1.jpg"));
+		buttonDelete.setIcon(new ImageIcon("images" + File.separator + "bin.png"));
 		buttonDelete.addActionListener(new ActionListener() {
 
 			@Override
@@ -89,6 +93,30 @@ public class Toolbar extends JToolBar{
 		add(buttonNew);
 		add(buttonEdit);
 		add(buttonDelete);
+		
+		addSeparator();
+		add(Box.createHorizontalGlue());	// stavlja search bar desno
+		JLabel jLabel = new JLabel("");
+		jLabel.setIcon(new ImageIcon("images" + File.separator + "loupe.png"));
+		JTextField searchArea = new JTextField(20);
+		searchArea.setToolTipText("npr. 'marko' + Enter");
+		searchArea.setPreferredSize(new Dimension(200,25));
+		searchArea.setMaximumSize(searchArea.getPreferredSize());
+		searchArea.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(TabbedPane.getState() == 0) {
+					StaffController.getInstance().searchStaff(searchArea.getText());
+					
+				}else if(TabbedPane.getState() == 1) {
+
+				}
+			}			
+		});
+		add(searchArea);	
+		add(jLabel);
+		addSeparator();
 
 	}
 }

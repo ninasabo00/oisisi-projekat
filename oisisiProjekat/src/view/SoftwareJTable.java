@@ -11,6 +11,8 @@ import javax.swing.table.TableCellRenderer;
 
 public class SoftwareJTable extends JTable {
 	
+	private static final long serialVersionUID = 8357328090930592482L;
+	
 	private static SoftwareJTable instance = null;
 	public static SoftwareJTable getInstance() {
 		if (instance == null) {
