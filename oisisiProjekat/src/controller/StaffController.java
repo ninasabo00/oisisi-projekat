@@ -24,4 +24,13 @@ public class StaffController {
 		StaffLogic.getInstance().addStaff(staff);
 		TabbedPane.getInstance().updateStaffTable();
 	}
+	
+	public Staff findStaff(String jmbg) {
+		return StaffLogic.getInstance().findStaff(jmbg);
+	}
+	
+	public void editStaff(Staff staff) {
+		StaffLogic.getInstance().editStaff(staff);
+		TabbedPane.getInstance().updateStaffTable();
+	}
 }

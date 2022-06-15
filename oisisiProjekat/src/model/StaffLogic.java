@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StaffLogic {
 
@@ -36,8 +37,13 @@ public class StaffLogic {
 		
 		Address address1 = new Address(1, "Dunavska", "Novi Sad");
 		Address address2 = new Address(1, "Fruskogorska", "Novi Sad");
+		List<Software> softwares = new ArrayList<Software>();
+		
 		Staff staff1 = new Staff("Marko", "Markovic", "123123", LocalDate.now(), "email@yahoo.com", address1);
+		staff1.setSoftwares(softwares);
 		Staff staff2 = new Staff("Pera", "Peric", "5211232", LocalDate.now(), "lala@gmail.com", address2);
+		staff2.setSoftwares(softwares);
+		
 		staffs.add(staff1);
 		staffs.add(staff2);
 	}
@@ -99,6 +105,31 @@ public class StaffLogic {
 	
 	public void addStaff(Staff staff) {
 		this.staffs.add(staff);
+	}
+
+	public Staff findStaff(String jmbg){
+		for(Staff staff : this.staffs) {
+			if(staff.getJmbg().equals(jmbg)) {
+				return staff;
+			}
+		}
+		return null;
+	}
+
+	public void editStaff(Staff staff){
+		for(Staff s : this.staffs) {
+			if(s.getJmbg().equals(staff.getJmbg())) {
+				s.setName(staff.getName());
+				s.setSurname(staff.getSurname());
+				s.setJmbg(staff.getJmbg());
+				s.setDateOfBirth(staff.getDateOfBirth());
+				s.setEmail(staff.getEmail());
+				s.setAddress(staff.getAddress());
+				s.setSoftwares(staff.getSoftwares());
+				break;
+			}
+
+		}
 	}
 	
 }

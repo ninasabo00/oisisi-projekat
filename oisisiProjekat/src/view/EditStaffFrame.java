@@ -30,23 +30,26 @@ import model.Software;
 import model.Staff;
 import model.StaffLogic;
 
-public class AddStaffFrame extends JDialog {
+public class EditStaffFrame extends JDialog {
 
-	private static final long serialVersionUID = -7995869934266012394L;
+	private static final long serialVersionUID = 5409168880063233233L;
 	
-	public static List<Software> softwares = new ArrayList<Software>();
 	public static DefaultListModel<String> lista = new DefaultListModel<String>();
 	public static JList<String> jList = new JList<String>(lista);
+	private static int currentRow;
+	public static List<Software> softwares = new ArrayList<Software>();
 	
-	
-	public AddStaffFrame() {
+	public EditStaffFrame() {
 		
-		setTitle("Dodavanje zaposlenog");
+		//selektovani zaposleni
+		currentRow = StaffJTable.getInstance().getSelectedRow();
+		Staff selectedStaff = StaffController.getInstance().findStaff((String)StaffJTable.getInstance().getValueAt(currentRow, 2));
+		
+		setTitle("Izmena podataka zaposlenog");
 		setSize(400, 500);
 		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(MainWindow.getInstance());
-		
 		new BorderLayout();
 		Dimension dimension  = new Dimension(150,20);
 		
@@ -135,6 +138,18 @@ public class AddStaffFrame extends JDialog {
 		textAddressCity.setToolTipText("npr. Novi Sad");
 		panelAddressCity.add(labelAddressCity);
 		panelAddressCity.add(textAddressCity);
+		
+		
+		//punjenje podacima text inpute
+		DateTimeFormatter formatted = DateTimeFormatter.ofPattern("dd.MM.yyyy.");
+		textName.setText(selectedStaff.getName());
+	    textSurname.setText(selectedStaff.getSurname());
+	    textJmbg.setText(selectedStaff.getJmbg());
+	    textDate.setText(formatted.format(selectedStaff.getDateOfBirth()));
+	    textAddressNumber.setText(String.valueOf(selectedStaff.getAddress().getNumber()));
+	    textAddressCity.setText(selectedStaff.getAddress().getCity());
+	    textAddressStreet.setText(selectedStaff.getAddress().getStreet());
+	    textEmail.setText(selectedStaff.getEmail());
 				
 		
 		JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -155,7 +170,7 @@ public class AddStaffFrame extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean exists = false;
 				for(Staff staff : StaffLogic.getInstance().getStaffs()) {
-					if(staff.getJmbg().equals(textJmbg.getText().trim())) {
+					if(staff.getJmbg().equals(textJmbg.getText().trim()) && !staff.getJmbg().equals(selectedStaff.getJmbg())) {
 						exists = true;
 					}
 				}
@@ -171,7 +186,7 @@ public class AddStaffFrame extends JDialog {
 				}else if(UtilityController.getInstance().validateDate(textDate.getText()) == false) {
 					JOptionPane.showMessageDialog(null, "Datum nije dobro unet","",JOptionPane.ERROR_MESSAGE);	
 				//}else if(textAddressStreet.getText().matches("[A-Ž][a-ž]+") == false) {
-					//JOptionPane.showMessageDialog(null, "Ulica nije uneta kako treba!","",JOptionPane.ERROR_MESSAGE);
+					//JOptionPane.showMessageDialog(null, "Ulica nije dobro uneto","",JOptionPane.ERROR_MESSAGE);	
 				}else if(UtilityController.getInstance().isNumber(textAddressNumber.getText()) == false) {
 					JOptionPane.showMessageDialog(null, "Broj kuce nije unet kako treba!","",JOptionPane.ERROR_MESSAGE);
 				}else if(UtilityController.getInstance().isNumber(textJmbg.getText()) == false) {
@@ -179,7 +194,7 @@ public class AddStaffFrame extends JDialog {
 				}else if(textEmail.getText().matches("[a-žA-Ž0-9.]+@[a-žA-Ž0-9.]+") == false) {
 					JOptionPane.showMessageDialog(null, "Email nije dobro unet","",JOptionPane.ERROR_MESSAGE);
 				//}else if(textAddressCity.getText().matches("[A-Ž][a-ž]+") == false) {
-					//JOptionPane.showMessageDialog(null, "Grad nije dobro unet","",JOptionPane.ERROR_MESSAGE);
+					//JOptionPane.showMessageDialog(null, "Grad nije dobro uneto","",JOptionPane.ERROR_MESSAGE);	
 				}else if(exists){
 					JOptionPane.showMessageDialog(null, "Vec postoji zaposleni sa istim jmbg","",JOptionPane.ERROR_MESSAGE);
 				}else {
@@ -187,7 +202,7 @@ public class AddStaffFrame extends JDialog {
 					Address address = new Address(Integer.parseInt(textAddressNumber.getText()), textAddressStreet.getText(), textAddressCity.getText());
 					Staff staff = new Staff(textName.getText(), textSurname.getText(), textJmbg.getText(), LocalDate.parse(textDate.getText(), formatted), textEmail.getText(), address);
 					staff.setSoftwares(softwares);
-					StaffController.getInstance().addStaff(staff);
+					StaffController.getInstance().editStaff(staff);
 					setVisible(false);
 				}
 			}
@@ -224,6 +239,7 @@ public class AddStaffFrame extends JDialog {
 		
 		
 		softwares = new ArrayList<Software>();
+		softwares = selectedStaff.getSoftwares();
 		lista = new DefaultListModel<String>();
 		for(Software s: softwares) {
 			lista.addElement(s.getName());
@@ -243,11 +259,12 @@ public class AddStaffFrame extends JDialog {
 				}else {
 					int option = JOptionPane.showConfirmDialog(null,"Da li ste sigurni?","Dodavanje ",JOptionPane.YES_NO_OPTION);
 					if(option == JOptionPane.YES_OPTION) {
-
+						softwares = selectedStaff.getSoftwares();
 						for(Software software: softwares) {
 							if(software.getName().equals(jList.getSelectedValue())){
 									softwares.remove(software);
 									lista.removeElement(software.getName());
+									//jList.updateUI();
 									break;
 							}
 						}
@@ -262,7 +279,7 @@ public class AddStaffFrame extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AddSoftwareListFrame addSoftwareListFrame = new AddSoftwareListFrame(false);
+				AddSoftwareListFrame addSoftwareListFrame = new AddSoftwareListFrame(true);
 				addSoftwareListFrame.setVisible(true);
 			}
 		});
@@ -282,6 +299,5 @@ public class AddStaffFrame extends JDialog {
 		add(jTabbedPane, BorderLayout.CENTER);
 		
 	}
-
-
+	
 }

@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-
 public class SoftwareLogic {
 	private static SoftwareLogic instance = null;
 
@@ -38,8 +36,10 @@ public class SoftwareLogic {
 		
 		Render render1 = new Render();
 		Software software1 = new Software("Software 1", brushes, ".fromat", "alat1, alat2", render1);
+		Software software2 = new Software("Software 2", brushes, ".fromat", "alat31, alat4", render1);
 		
 		softwares.add(software1);
+		softwares.add(software2);
 	}
 	
 	public ArrayList<Software> getSoftwares() {

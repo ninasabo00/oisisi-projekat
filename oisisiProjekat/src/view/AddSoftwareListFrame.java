@@ -22,7 +22,7 @@ public class AddSoftwareListFrame extends JDialog {
 
 	private static final long serialVersionUID = -3315128639685663235L;
 
-	public AddSoftwareListFrame() {
+	public AddSoftwareListFrame(boolean isEdit) {
 		
 		setTitle("Dodavanje predmeta");
 		setSize(300, 500);
@@ -36,10 +36,20 @@ public class AddSoftwareListFrame extends JDialog {
 		for(Software s: SoftwareLogic.getInstance().getSoftwares()) {
 			allSoftwares.add(s);
 		}
-		allSoftwares.removeAll(AddStaffFrame.softwares);
-		for(Software s: allSoftwares) {
-			lista.addElement(s.getName());
+		
+		//provera da li se poziva prozor za dodavanje ili edit
+		if(!isEdit) {
+			allSoftwares.removeAll(AddStaffFrame.softwares);
+			for(Software s: allSoftwares) {
+				lista.addElement(s.getName());
+			}
+		}else {
+			allSoftwares.removeAll(EditStaffFrame.softwares);
+			for(Software s: allSoftwares) {
+				lista.addElement(s.getName());
+			}
 		}
+
 		
 		JList<String> jList = new JList<String>(lista);
 		jList.setPreferredSize(new Dimension(200,300));
@@ -61,12 +71,17 @@ public class AddSoftwareListFrame extends JDialog {
 				}else {
 					int option = JOptionPane.showConfirmDialog(null,"Da li ste sigurni?","Dodavanje ",JOptionPane.YES_NO_OPTION);
 					if(option == JOptionPane.YES_OPTION) {
-
 						for(Software software: SoftwareLogic.getInstance().getSoftwares()) {
 							if(software.getName().equals(jList.getSelectedValue())){
+								if(!isEdit) {
 									AddStaffFrame.softwares.add(software);
 									AddStaffFrame.lista.addElement(software.getName());
-									setVisible(false);											
+									setVisible(false);
+								}else {
+									EditStaffFrame.softwares.add(software);
+									EditStaffFrame.lista.addElement(software.getName());
+									setVisible(false);
+								}				
 							}
 						}
 					}					

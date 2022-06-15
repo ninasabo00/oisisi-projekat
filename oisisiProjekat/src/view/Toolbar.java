@@ -3,6 +3,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import controller.StaffController;
+import model.Software;
 
 public class Toolbar extends JToolBar{
 
@@ -35,6 +37,24 @@ public class Toolbar extends JToolBar{
 		JButton buttonEdit = new JButton();
 		buttonEdit.setToolTipText("Edit");
 		buttonEdit.setIcon(new ImageIcon("images" + File.separator + "edit.jpg"));
+		buttonEdit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(TabbedPane.getState() == 0) {
+					if(StaffJTable.getInstance().getSelectedRow() == -1) {
+					    JOptionPane.showMessageDialog(null, "Nije selektovan ni jedan zaposleni","",JOptionPane.ERROR_MESSAGE);
+						}else {
+							EditStaffFrame editStaffFrame = new EditStaffFrame();
+							editStaffFrame.softwares = new ArrayList<Software>();
+							editStaffFrame.setVisible(true);
+						}
+					
+				}else if(TabbedPane.getState() == 1) {
+					
+				}		
+			}	
+		});
 
 		JButton buttonDelete = new JButton();
 		buttonDelete.setToolTipText("Delete");

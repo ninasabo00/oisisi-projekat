@@ -3,9 +3,10 @@ package view;
 import javax.swing.table.AbstractTableModel;
 
 import model.SoftwareLogic;
-import model.StaffLogic;
 
 public class AbstractTableSoftware extends AbstractTableModel {
+
+	private static final long serialVersionUID = -3331064739767033310L;
 
 	@Override
 	public int getRowCount() {
