@@ -70,7 +70,7 @@ public class SoftwareLogic {
 		case 0:
 			return software.getName();
 		case 1:
-			return software.getBrushes();
+			return "Brushes ("+software.getBrushes().size()+")";
 		case 2:
 			return software.getFileFormat();
 		case 3:
@@ -83,4 +83,13 @@ public class SoftwareLogic {
 		}
 	}
 	//################################
+	
+	public Software findSoftware(String softwareName) {
+		for(Software software : this.softwares) {
+			if(software.getName().equals(softwareName)) {
+				return software;
+			}
+		}
+		return null;
+	}
 }

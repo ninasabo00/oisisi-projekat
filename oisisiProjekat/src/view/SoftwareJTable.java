@@ -2,7 +2,10 @@ package view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -29,7 +32,21 @@ public class SoftwareJTable extends JTable {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         setDefaultRenderer(Integer.class, centerRenderer);
         setDefaultRenderer(Double.class, centerRenderer);
+        
+        Action viewBrushes = new AbstractAction() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JTable table = (JTable)e.getSource();
+		        int modelRow = Integer.valueOf( e.getActionCommand() );
+		        BrushesDialog brushesDialog = new BrushesDialog(modelRow);
+		        brushesDialog.setVisible(true);
+			}
+		};
+		ButtonColumn buttonColumn = new ButtonColumn(this, viewBrushes, 1);
+
 	}
+	
 	
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -40,5 +57,10 @@ public class SoftwareJTable extends JTable {
 			c.setBackground(Color.WHITE);
 		}
 		return c;
+	}
+	
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+	    return true;
 	}
 }
