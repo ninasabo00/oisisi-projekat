@@ -34,9 +34,20 @@ public class SoftwareLogic {
 		brushes.add(brush1);
 		brushes.add(brush2);
 		
-		Render render1 = new Render();
+		Render render1 = new Render(
+				"Materijal 1, Materijal 2",
+				"Kamera 1, Kamera 2",
+				"Objekat 1, Objekat 2",
+				"Render 1"
+				);
+		Render render2 = new Render(
+				"Materijal 1, Materijal 2",
+				"Kamera 1, Kamera 2",
+				"Objekat 1, Objekat 2",
+				"Render 2"
+				);
 		Software software1 = new Software("Software 1", brushes, ".fromat", "alat1, alat2", render1);
-		Software software2 = new Software("Software 2", brushes, ".fromat", "alat31, alat4", render1);
+		Software software2 = new Software("Software 2", brushes, ".fromat", "alat31, alat4", render2);
 		
 		softwares.add(software1);
 		softwares.add(software2);
@@ -77,7 +88,7 @@ public class SoftwareLogic {
 			return software.getAnimationTools();
 		case 4:
 //			return software.getRender();
-			return "render";
+			return software.getRender().getName();
 		default:
 			return null;
 		}

@@ -39,13 +39,22 @@ public class SoftwareJTable extends JTable {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JTable table = (JTable)e.getSource();
 		        int modelRow = Integer.valueOf( e.getActionCommand() );
 		        BrushesDialog brushesDialog = new BrushesDialog(modelRow);
 		        brushesDialog.setVisible(true);
 			}
 		};
-		ButtonColumn buttonColumn = new ButtonColumn(this, viewBrushes, 1);
+		Action viewRender = new AbstractAction() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+		        int modelRow = Integer.valueOf( e.getActionCommand() );
+		        RenderDialog renderDialog = new RenderDialog(modelRow);
+		        renderDialog.setVisible(true);
+			}
+		};
+		ButtonColumn buttonBrushesColumn = new ButtonColumn(this, viewBrushes, 1);
+		ButtonColumn buttonRenderColumn = new ButtonColumn(this, viewRender, 4);
 
 	}
 	

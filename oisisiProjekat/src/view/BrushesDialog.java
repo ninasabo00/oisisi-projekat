@@ -23,7 +23,6 @@ public class BrushesDialog extends JDialog{
 		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(MainWindow.getInstance());
-		new BorderLayout();
 		
 		String selectedSoftwareName = (String)SoftwareJTable.getInstance().getValueAt(selectedRow, 0);
 		Software software = SoftwareController.getInstance().findSoftware(selectedSoftwareName);
