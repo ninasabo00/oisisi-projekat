@@ -116,9 +116,9 @@ public class StaffLogic {
 		return null;
 	}
 
-	public void editStaff(Staff staff){
+	public void editStaff(Staff staff, String jmbg){ // da nismo slali jmbg onda nikad ne bi pronasao starog usera jer se promenio jmbg i nikad ga ne bi izmenio
 		for(Staff s : this.staffs) {
-			if(s.getJmbg().equals(staff.getJmbg())) {
+			if(s.getJmbg().equals(jmbg)) {
 				s.setName(staff.getName());
 				s.setSurname(staff.getSurname());
 				s.setJmbg(staff.getJmbg());

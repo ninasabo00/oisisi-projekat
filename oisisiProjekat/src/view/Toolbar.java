@@ -39,6 +39,7 @@ public class Toolbar extends JToolBar{
 		buttonEdit.setIcon(new ImageIcon("images" + File.separator + "edit.jpg"));
 		buttonEdit.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("static-access") //brise warning
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(TabbedPane.getState() == 0) {
@@ -46,7 +47,7 @@ public class Toolbar extends JToolBar{
 					    JOptionPane.showMessageDialog(null, "Nije selektovan ni jedan zaposleni","",JOptionPane.ERROR_MESSAGE);
 						}else {
 							EditStaffFrame editStaffFrame = new EditStaffFrame();
-							editStaffFrame.softwares = new ArrayList<Software>();
+							editStaffFrame.softwares = new ArrayList<Software>(); // prazni listu prilikom ucitavanja prozora kako ne bi svim zaposlenima dodao softver
 							editStaffFrame.setVisible(true);
 						}
 					

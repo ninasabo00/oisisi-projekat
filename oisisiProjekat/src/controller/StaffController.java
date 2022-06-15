@@ -29,8 +29,8 @@ public class StaffController {
 		return StaffLogic.getInstance().findStaff(jmbg);
 	}
 	
-	public void editStaff(Staff staff) {
-		StaffLogic.getInstance().editStaff(staff);
+	public void editStaff(Staff staff, String jmbg) {
+		StaffLogic.getInstance().editStaff(staff, jmbg);
 		TabbedPane.getInstance().updateStaffTable();
 	}
 }

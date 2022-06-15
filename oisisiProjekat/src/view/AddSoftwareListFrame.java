@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -24,7 +27,7 @@ public class AddSoftwareListFrame extends JDialog {
 
 	public AddSoftwareListFrame(boolean isEdit) {
 		
-		setTitle("Dodavanje predmeta");
+		setTitle("Dodavanje softvera");
 		setSize(300, 500);
 		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -44,7 +47,9 @@ public class AddSoftwareListFrame extends JDialog {
 				lista.addElement(s.getName());
 			}
 		}else {
-			allSoftwares.removeAll(EditStaffFrame.softwares);
+			//spaja ove dve liste kako bi se refresovali softveri prilikom dodavanja novih
+			List<Software> list = Stream.concat(EditStaffFrame.helperStaff.getSoftwares().stream(), EditStaffFrame.softwares.stream()).collect(Collectors.toList());	
+			allSoftwares.removeAll(list);
 			for(Software s: allSoftwares) {
 				lista.addElement(s.getName());
 			}

@@ -38,12 +38,14 @@ public class EditStaffFrame extends JDialog {
 	public static JList<String> jList = new JList<String>(lista);
 	private static int currentRow;
 	public static List<Software> softwares = new ArrayList<Software>();
+	public static Staff helperStaff; // pomaze pri refresofanju liste u AddSoftwareListFrame
 	
 	public EditStaffFrame() {
 		
 		//selektovani zaposleni
 		currentRow = StaffJTable.getInstance().getSelectedRow();
 		Staff selectedStaff = StaffController.getInstance().findStaff((String)StaffJTable.getInstance().getValueAt(currentRow, 2));
+		helperStaff = selectedStaff;
 		
 		setTitle("Izmena podataka zaposlenog");
 		setSize(400, 500);
@@ -202,7 +204,7 @@ public class EditStaffFrame extends JDialog {
 					Address address = new Address(Integer.parseInt(textAddressNumber.getText()), textAddressStreet.getText(), textAddressCity.getText());
 					Staff staff = new Staff(textName.getText(), textSurname.getText(), textJmbg.getText(), LocalDate.parse(textDate.getText(), formatted), textEmail.getText(), address);
 					staff.setSoftwares(softwares);
-					StaffController.getInstance().editStaff(staff);
+					StaffController.getInstance().editStaff(staff, selectedStaff.getJmbg());	//saljemo i stari jmbg kako bi mogli da pronajdemo tog usera i da ga izmenimo
 					setVisible(false);
 				}
 			}
@@ -264,7 +266,6 @@ public class EditStaffFrame extends JDialog {
 							if(software.getName().equals(jList.getSelectedValue())){
 									softwares.remove(software);
 									lista.removeElement(software.getName());
-									//jList.updateUI();
 									break;
 							}
 						}
@@ -279,6 +280,7 @@ public class EditStaffFrame extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//softwares = selectedStaff.getSoftwares();
 				AddSoftwareListFrame addSoftwareListFrame = new AddSoftwareListFrame(true);
 				addSoftwareListFrame.setVisible(true);
 			}
