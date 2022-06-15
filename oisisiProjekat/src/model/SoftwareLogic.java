@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SoftwareLogic {
 	private static SoftwareLogic instance = null;
@@ -14,6 +15,7 @@ public class SoftwareLogic {
 	
 	private ArrayList<Software> softwares = new ArrayList<Software>();
 	private ArrayList<String> columns;
+	private List<Render> renders = new ArrayList<Render>();
 	
 	private SoftwareLogic() {
 		
@@ -23,17 +25,11 @@ public class SoftwareLogic {
 		columns.add("FAJL FORMAT");
 		columns.add("ALATI ZA ANIMACIJU");
 		columns.add("RENDER");
-
+		initRenders();
 		initSoftwares();
 	}
 	
-	public void initSoftwares() {
-		Brush brush1 = new Brush("BrushName1", "Brush description", "red");
-		Brush brush2 = new Brush("BrushName2", "Brush description", "blue");
-		ArrayList<Brush> brushes = new ArrayList<Brush>();
-		brushes.add(brush1);
-		brushes.add(brush2);
-		
+	public void initRenders() {
 		Render render1 = new Render(
 				"Materijal 1, Materijal 2",
 				"Kamera 1, Kamera 2",
@@ -46,11 +42,41 @@ public class SoftwareLogic {
 				"Objekat 1, Objekat 2",
 				"Render 2"
 				);
-		Software software1 = new Software("Software 1", brushes, ".fromat", "alat1, alat2", render1);
-		Software software2 = new Software("Software 2", brushes, ".fromat", "alat31, alat4", render2);
+		Render render3 = new Render(
+				"Materijal 1, Materijal 2",
+				"Kamera 1, Kamera 2",
+				"Objekat 1, Objekat 2",
+				"Render 3"
+				);
+		Render render4 = new Render(
+				"Materijal 1, Materijal 2",
+				"Kamera 1, Kamera 2",
+				"Objekat 1, Objekat 2",
+				"Render 4"
+				);
+		renders.add(render1);
+		renders.add(render2);
+		renders.add(render3);
+		renders.add(render4);
+	}
+	
+	public void initSoftwares() {
+		Brush brush1 = new Brush("BrushName1", "Brush description", "red");
+		Brush brush2 = new Brush("BrushName2", "Brush description", "blue");
+		ArrayList<Brush> brushes = new ArrayList<Brush>();
+		brushes.add(brush1);
+		brushes.add(brush2);
+		
+		
+		Software software1 = new Software("Software 1", brushes, ".fromat", "alat1, alat2", renders.get(0));
+		Software software2 = new Software("Software 2", brushes, ".fromat", "alat31, alat4", renders.get(2));
 		
 		softwares.add(software1);
 		softwares.add(software2);
+	}
+	
+	public List<Render> getRenders(){
+		return renders;
 	}
 	
 	public ArrayList<Software> getSoftwares() {

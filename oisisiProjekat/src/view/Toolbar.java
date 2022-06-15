@@ -33,7 +33,8 @@ public class Toolbar extends JToolBar{
 					AddStaffFrame addStaffFrame = new AddStaffFrame();
 					addStaffFrame.setVisible(true);
 				}else if(TabbedPane.getState() == 1) {
-
+					AddSoftwareFrame addSoftwareFrame = new AddSoftwareFrame();
+					addSoftwareFrame.setVisible(true);
 				}		
 			}	
 		});
