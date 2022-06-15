@@ -16,6 +16,7 @@ public class StaffLogic {
 	}
 
 	private ArrayList<Staff> staffs = new ArrayList<Staff>();
+	private ArrayList<Staff> staffs2 = new ArrayList<Staff>();	//koristi se za pretragu
 	private ArrayList<String> columns;
 	
 	
@@ -46,6 +47,8 @@ public class StaffLogic {
 		
 		staffs.add(staff1);
 		staffs.add(staff2);
+		staffs2.add(staff1);
+		staffs2.add(staff2);
 	}
 	
 
@@ -129,6 +132,20 @@ public class StaffLogic {
 				break;
 			}
 
+		}
+	}
+
+	public void searchStaff(String name){
+		ArrayList<Staff> temp = new ArrayList<Staff>();
+		if(name != "" && name != null){
+			for(Staff staff : this.staffs2) {
+				if(staff.getName().toLowerCase().contains(name.toLowerCase()) || staff.getSurname().toLowerCase().contains(name.toLowerCase())) {
+					temp.add(staff);
+				}
+			}
+			this.staffs = temp;
+		}else{
+			this.staffs = this.staffs2;
 		}
 	}
 	
