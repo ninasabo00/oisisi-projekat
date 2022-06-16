@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 
+import controller.SoftwareController;
 import controller.StaffController;
 import model.Software;
 
@@ -107,9 +108,20 @@ public class MenuBar extends JMenuBar {
 						JOptionPane.showMessageDialog(null, "Morate selektovati nekog zaposlenog!","",JOptionPane.ERROR_MESSAGE);
 						System.out.println(exception.getMessage());	
 					}	
-
 				}else if(TabbedPane.getState() == 1) {
-					System.out.println("Nema jos ovog brisanja");
+					try {
+						int option =JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da obrisete?","Brisanje zaposlenog?",JOptionPane.YES_NO_OPTION);
+						if(option == JOptionPane.YES_OPTION) {
+						
+							int currentRow = SoftwareJTable.getInstance().getSelectedRow();
+							String selectedSoftwareName = (String)SoftwareJTable.getInstance().getValueAt(currentRow, 0);
+							SoftwareController.getInstance().deleteSoftware(selectedSoftwareName);
+						}
+					}catch (Exception exception) {
+						JOptionPane.showMessageDialog(null, "Morate selektovati neki softver!","",JOptionPane.ERROR_MESSAGE);
+						System.out.println(exception.getMessage());	
+					}	
+
 				}
 				
 			}	

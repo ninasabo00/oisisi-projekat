@@ -164,4 +164,13 @@ public class SoftwareLogic {
 			}
 		}
 	}
+	
+	public void deleteSoftware(String softwareName) {
+		for(Software s : this.softwares) {
+			if(s.getName().equals(softwareName)) {
+				this.softwares.remove(s);
+				break;
+			}
+		}
+	}
 }
