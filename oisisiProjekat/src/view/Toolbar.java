@@ -50,14 +50,19 @@ public class Toolbar extends JToolBar{
 				if(TabbedPane.getState() == 0) {
 					if(StaffJTable.getInstance().getSelectedRow() == -1) {
 					    JOptionPane.showMessageDialog(null, "Nije selektovan ni jedan zaposleni","",JOptionPane.ERROR_MESSAGE);
-						}else {
-							EditStaffFrame editStaffFrame = new EditStaffFrame();
-							editStaffFrame.softwares = new ArrayList<Software>(); // prazni listu prilikom ucitavanja prozora kako ne bi svim zaposlenima dodao softver
-							editStaffFrame.setVisible(true);
-						}
+					}else {
+						EditStaffFrame editStaffFrame = new EditStaffFrame();
+						editStaffFrame.softwares = new ArrayList<Software>(); // prazni listu prilikom ucitavanja prozora kako ne bi svim zaposlenima dodao softver
+						editStaffFrame.setVisible(true);
+					}
 					
 				}else if(TabbedPane.getState() == 1) {
-					
+					if(SoftwareJTable.getInstance().getSelectedRow() == -1) {
+					    JOptionPane.showMessageDialog(null, "Nije selektovan ni jedan softver","",JOptionPane.ERROR_MESSAGE);
+					}else {
+						EditSoftwareFrame editSoftwareFrame = new EditSoftwareFrame();
+						editSoftwareFrame.setVisible(true);
+					}
 				}		
 			}	
 		});

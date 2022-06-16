@@ -83,8 +83,8 @@ public class SoftwareLogic {
 		software2brushes.add(brushes.get(3));
 		
 		
-		Software software1 = new Software("Software 1", software1brushes, ".fromat", "alat1, alat2", renders.get(0));
-		Software software2 = new Software("Software 2", software2brushes, ".fromat", "alat31, alat4", renders.get(2));
+		Software software1 = new Software("Software 1", software1brushes, ".format1", "alat1, alat2", renders.get(0));
+		Software software2 = new Software("Software 2", software2brushes, ".format3", "alat31, alat4", renders.get(2));
 		
 		softwares.add(software1);
 		softwares.add(software2);
@@ -150,5 +150,18 @@ public class SoftwareLogic {
 			}
 		}
 		return null;
+	}
+	
+	public void editSoftware(Software software, String softwareName) {
+		for(Software s : this.softwares) {
+			if(s.getName().equals(softwareName)) {
+				s.setName(software.getName());
+				s.setFileFormat(software.getFileFormat());
+				s.setBrushes(software.getBrushes());
+				s.setRender(software.getRender());
+				s.setAnimationTools(software.getAnimationTools());
+				break;
+			}
+		}
 	}
 }

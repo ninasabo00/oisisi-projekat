@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -19,7 +20,7 @@ import model.Brush;
 import model.SoftwareLogic;
 
 public class AddBrushListFrame extends JDialog {
-	public AddBrushListFrame() {
+	public AddBrushListFrame(boolean isEdit) {
 		setTitle("Dodavanje cetkica");
 		setSize(300, 500);
 		setModal(true);
@@ -28,9 +29,14 @@ public class AddBrushListFrame extends JDialog {
 		new BorderLayout();
 		
 		DefaultListModel<String> lista = new DefaultListModel<String>();
-		List<Brush> selectedBrushes = AddSoftwareFrame.brushes;
+		List<Brush> selectedBrushes;
+		if(isEdit == false) {
+			selectedBrushes = AddSoftwareFrame.brushes;	
+		}else {
+			selectedBrushes = EditSoftwareFrame.brushes;			
+		}
 		List<Brush> brushesList = SoftwareLogic.getInstance().getBrushes();
-		List<Brush> allBrushes = brushesList;
+		List<Brush> allBrushes = new ArrayList<Brush>(brushesList);
 
 		for(Brush brush : selectedBrushes) {
 			for(Brush brushTmp : allBrushes) {
@@ -64,8 +70,13 @@ public class AddBrushListFrame extends JDialog {
 					if(option == JOptionPane.YES_OPTION) {
 						for(Brush brush: SoftwareLogic.getInstance().getBrushes()) {
 							if(brush.getName().equals(jList.getSelectedValue())){
-								AddSoftwareFrame.brushes.add(brush);
-								AddSoftwareFrame.lista.addElement(brush.getName());
+								if(isEdit==false) {
+									AddSoftwareFrame.brushes.add(brush);
+									AddSoftwareFrame.brushesString.addElement(brush.getName());									
+								}else {
+									EditSoftwareFrame.brushes.add(brush);
+									EditSoftwareFrame.brushesString.addElement(brush.getName());	
+								}
 								setVisible(false);
 							}
 						}

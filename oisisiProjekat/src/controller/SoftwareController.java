@@ -24,4 +24,9 @@ public class SoftwareController {
 		SoftwareLogic.getInstance().addSoftware(software);
 		TabbedPane.getInstance().updateSoftwareTable();
 	}
+	
+	public void editSoftware(Software software, String name) {
+		SoftwareLogic.getInstance().editSoftware(software, name);
+		TabbedPane.getInstance().updateSoftwareTable();
+	}
 }

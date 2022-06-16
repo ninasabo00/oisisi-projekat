@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,27 +22,26 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import controller.SoftwareController;
-import controller.StaffController;
-import controller.UtilityController;
-import model.Address;
 import model.Brush;
 import model.Render;
 import model.Software;
 import model.SoftwareLogic;
-import model.Staff;
-import model.StaffLogic;
 
-public class AddSoftwareFrame extends JDialog {
-	
+public class EditSoftwareFrame extends JDialog {
 	public static List<Brush> brushes;
 	public static DefaultListModel<String> brushesString;
 	public static JList<String> jList;
+	private static int currentRow;
 
-	public AddSoftwareFrame() {
+	public EditSoftwareFrame() {
+		currentRow = SoftwareJTable.getInstance().getSelectedRow();
+		Software selectedSoftware = SoftwareController.getInstance().findSoftware((String)SoftwareJTable.getInstance().getValueAt(currentRow, 0));
+		//za potrebe poredjenja naziva softvera (da li softver sa istim nazivom postoji)
+		Software softwareHelper = selectedSoftware;
 		brushes = new ArrayList<Brush>();
 		brushesString = new DefaultListModel<String>();
-		jList = new JList<String>(brushesString);
-		setTitle("Dodavanje softvera");
+		
+		setTitle("Izmena podataka softvera");
 		setSize(400, 500);
 		setModal(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -107,7 +104,7 @@ public class AddSoftwareFrame extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AddBrushListFrame addBrushListFrame = new AddBrushListFrame(false);
+				AddBrushListFrame addBrushListFrame = new AddBrushListFrame(true);
 				addBrushListFrame.setVisible(true);
 			}
 		});
@@ -135,7 +132,17 @@ public class AddSoftwareFrame extends JDialog {
 
 		});
 		
-
+		//popunjavanje inputa podacima
+		textName.setText(selectedSoftware.getName());
+		formatComboBox.setSelectedItem(selectedSoftware.getFileFormat());
+		textAnimationTools.setText(selectedSoftware.getAnimationTools());
+		renderComboBox.setSelectedItem(selectedSoftware.getRender().getName());
+		brushes = selectedSoftware.getBrushes();
+		
+		for(Brush b : brushes) {
+			brushesString.addElement(b.getName());
+		}
+ 		jList = new JList<String>(brushesString);
 		jList.setPreferredSize(new Dimension(200,200));
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(jList);
@@ -159,7 +166,8 @@ public class AddSoftwareFrame extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				boolean exists = false;
 				for(Software software : SoftwareLogic.getInstance().getSoftwares()) {
-					if(software.getName().equals(textName.getText().trim())) {
+					//postoji softver sa tim imenom i to ime nije ime od softvera kojeg pokusavamo da editujemo
+					if(software.getName().equals(textName.getText().trim()) && !software.getName().equals(softwareHelper.getName())) {
 						exists = true;
 					}
 				}
@@ -176,7 +184,7 @@ public class AddSoftwareFrame extends JDialog {
 						}
 					}
 					Software soft = new Software(textName.getText(), brushes,(String)formatComboBox.getSelectedItem(), textAnimationTools.getText(), render);
-					SoftwareController.getInstance().addSoftware(soft);
+					SoftwareController.getInstance().editSoftware(soft, softwareHelper.getName());
 					setVisible(false);
 				}
 			}

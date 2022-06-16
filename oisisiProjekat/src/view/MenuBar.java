@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.ArrayList;
+
 import controller.StaffController;
+import model.Software;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
@@ -34,7 +37,8 @@ public class MenuBar extends JMenuBar {
 					AddStaffFrame addStaffFrame = new AddStaffFrame();
 					addStaffFrame.setVisible(true);
 				}else if(TabbedPane.getState() == 1) {
-
+					AddSoftwareFrame addSoftwareFrame = new AddSoftwareFrame();
+					addSoftwareFrame.setVisible(true);
 				}		
 			}	
 		});
@@ -63,8 +67,23 @@ public class MenuBar extends JMenuBar {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("editEdit");		
-			}	
+				if(TabbedPane.getState() == 0) {
+					if(StaffJTable.getInstance().getSelectedRow() == -1) {
+					    JOptionPane.showMessageDialog(null, "Nije selektovan ni jedan zaposleni","",JOptionPane.ERROR_MESSAGE);
+					}else {
+						EditStaffFrame editStaffFrame = new EditStaffFrame();
+						editStaffFrame.softwares = new ArrayList<Software>(); // prazni listu prilikom ucitavanja prozora kako ne bi svim zaposlenima dodao softver
+						editStaffFrame.setVisible(true);
+					}
+					
+				}else if(TabbedPane.getState() == 1) {
+					if(SoftwareJTable.getInstance().getSelectedRow() == -1) {
+					    JOptionPane.showMessageDialog(null, "Nije selektovan ni jedan softver","",JOptionPane.ERROR_MESSAGE);
+					}else {
+						EditSoftwareFrame editSoftwareFrame = new EditSoftwareFrame();
+						editSoftwareFrame.setVisible(true);
+					}
+				}				}	
 		});
 		edit.add(editEdit);
 		
