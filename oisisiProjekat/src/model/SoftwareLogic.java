@@ -63,10 +63,10 @@ public class SoftwareLogic {
 	}
 	
 	private void initBrushes() {
-		Brush brush1 = new Brush("BrushName1", "Brush description", "red");
-		Brush brush2 = new Brush("BrushName2", "Brush description", "blue");
-		Brush brush3 = new Brush("BrushName3", "Brush description", "green");
-		Brush brush4 = new Brush("BrushName4", "Brush description", "yellow");
+		Brush brush1 = new Brush("BrushName1", "Brush description", "#FF0700");
+		Brush brush2 = new Brush("BrushName2", "Brush description", "#0059FF");
+		Brush brush3 = new Brush("BrushName3", "Brush description", "#B900FF");
+		Brush brush4 = new Brush("BrushName4", "Brush description", "#F0FF00");
 		brushes.add(brush1);
 		brushes.add(brush2);
 		brushes.add(brush3);
