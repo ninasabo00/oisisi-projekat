@@ -15,8 +15,9 @@ public class SoftwareLogic {
 	
 	private ArrayList<Software> softwares = new ArrayList<Software>();
 	private ArrayList<String> columns;
-	private List<Render> renders = new ArrayList<Render>();
-	
+	private ArrayList<Render> renders = new ArrayList<Render>();
+	private ArrayList<Brush> brushes = new ArrayList<Brush>();
+
 	private SoftwareLogic() {
 		
 		columns = new ArrayList<String>();
@@ -26,6 +27,7 @@ public class SoftwareLogic {
 		columns.add("ALATI ZA ANIMACIJU");
 		columns.add("RENDER");
 		initRenders();
+		initBrushes();
 		initSoftwares();
 	}
 	
@@ -60,23 +62,40 @@ public class SoftwareLogic {
 		renders.add(render4);
 	}
 	
-	public void initSoftwares() {
+	private void initBrushes() {
 		Brush brush1 = new Brush("BrushName1", "Brush description", "red");
 		Brush brush2 = new Brush("BrushName2", "Brush description", "blue");
-		ArrayList<Brush> brushes = new ArrayList<Brush>();
+		Brush brush3 = new Brush("BrushName3", "Brush description", "green");
+		Brush brush4 = new Brush("BrushName4", "Brush description", "yellow");
 		brushes.add(brush1);
 		brushes.add(brush2);
+		brushes.add(brush3);
+		brushes.add(brush4);
+	}
+	
+	public void initSoftwares() {
+		ArrayList<Brush> software1brushes = new ArrayList<Brush>();
+		software1brushes.add(brushes.get(0));
+		software1brushes.add(brushes.get(1));
+		
+		ArrayList<Brush> software2brushes = new ArrayList<Brush>();
+		software2brushes.add(brushes.get(2));
+		software2brushes.add(brushes.get(3));
 		
 		
-		Software software1 = new Software("Software 1", brushes, ".fromat", "alat1, alat2", renders.get(0));
-		Software software2 = new Software("Software 2", brushes, ".fromat", "alat31, alat4", renders.get(2));
+		Software software1 = new Software("Software 1", software1brushes, ".fromat", "alat1, alat2", renders.get(0));
+		Software software2 = new Software("Software 2", software2brushes, ".fromat", "alat31, alat4", renders.get(2));
 		
 		softwares.add(software1);
 		softwares.add(software2);
 	}
 	
-	public List<Render> getRenders(){
+	public ArrayList<Render> getRenders(){
 		return renders;
+	}
+	
+	public ArrayList<Brush> getBrushes(){
+		return brushes;
 	}
 	
 	public ArrayList<Software> getSoftwares() {
