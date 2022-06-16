@@ -106,6 +106,9 @@ public class SoftwareLogic {
 		this.softwares = softwares;
 	}
 	
+	public void addSoftware(Software software) {
+		this.softwares.add(software);
+	}
 	
 	public int getColumnCount() {
 		return 5;

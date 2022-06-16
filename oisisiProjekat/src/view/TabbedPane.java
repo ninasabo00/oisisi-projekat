@@ -59,5 +59,10 @@ public class TabbedPane extends JTabbedPane  {
 		validate();
 	}
 	
+	public void updateSoftwareTable() {
+		AbstractTableSoftware model = (AbstractTableSoftware)softwareJTable.getModel();
+		model.fireTableDataChanged();
+		validate();
+	}
 	
 }

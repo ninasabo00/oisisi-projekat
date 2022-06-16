@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +23,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import controller.SoftwareController;
+import controller.StaffController;
+import controller.UtilityController;
+import model.Address;
 import model.Brush;
 import model.Render;
 import model.Software;
 import model.SoftwareLogic;
+import model.Staff;
+import model.StaffLogic;
 
 public class AddSoftwareFrame extends JDialog {
 	
@@ -133,6 +141,50 @@ public class AddSoftwareFrame extends JDialog {
 		scrollPane.setViewportView(jList);
 		scrollPane.createVerticalScrollBar();
 		
+		JPanel lowerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JButton accept = new JButton("Potvrdi");
+		JButton cancel = new JButton("Odustani");
+		cancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}	
+		});
+		
+		accept.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				boolean exists = false;
+				for(Software software : SoftwareLogic.getInstance().getSoftwares()) {
+					if(software.getName().equals(textName.getText().trim())) {
+						exists = true;
+					}
+				}
+				if(textName.getText().equals("") || textAnimationTools.getText().equals("") || brushes.size()==0) {
+					JOptionPane.showMessageDialog(null, "Niste popunili sva polja!","",JOptionPane.ERROR_MESSAGE);
+				}else if(exists == true) {
+					JOptionPane.showMessageDialog(null, "Vec postoji softver sa istim nazivom","",JOptionPane.ERROR_MESSAGE);					
+				}else {
+					Render render = new Render();
+					for(Render r : SoftwareLogic.getInstance().getRenders()) {
+						if(r.getName().equals((String)renderComboBox.getSelectedItem())) {
+							render = r;
+							break;
+						}
+					}
+					Software soft = new Software(textName.getText(), brushes,(String)formatComboBox.getSelectedItem(), textAnimationTools.getText(), render);
+					SoftwareController.getInstance().addSoftware(soft);
+					setVisible(false);
+				}
+			}
+		});
+		
+		lowerPanel.add(accept);
+		lowerPanel.add(cancel);
+		
 		Box boxSoftware = Box.createVerticalBox();
 		boxSoftware.add(Box.createVerticalStrut(20));
 		boxSoftware.add(panelName);
@@ -145,6 +197,7 @@ public class AddSoftwareFrame extends JDialog {
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.add(boxSoftware, BorderLayout.CENTER);
+		mainPanel.add(lowerPanel, BorderLayout.SOUTH);
 		add(mainPanel);
 	}
 }
