@@ -27,6 +27,7 @@ import controller.StaffController;
 import controller.UtilityController;
 import model.Address;
 import model.Software;
+import model.SoftwareLogic;
 import model.Staff;
 import model.StaffLogic;
 
@@ -181,21 +182,21 @@ public class EditStaffFrame extends JDialog {
 				if(textName.getText().equals("") || textSurname.getText().equals("") || textDate.getText().equals("") || textAddressStreet.getText().equals("") || 
 						textJmbg.getText().equals("") || textEmail.getText().equals("") || textAddressCity.getText().equals("") || textAddressNumber.getText().equals(""))  {
 					JOptionPane.showMessageDialog(null, "Niste popunili sva polja!", "",JOptionPane.ERROR_MESSAGE);
-				}else if(textName.getText().matches("[A-Ž][a-ž]+") == false) {
+				}else if(textName.getText().matches("[A-ï¿½][a-ï¿½]+") == false) {
 						JOptionPane.showMessageDialog(null, "Ime nije dobro uneto","",JOptionPane.ERROR_MESSAGE);
-				}else if(textSurname.getText().matches("[A-Ž][a-ž]+") == false) {
+				}else if(textSurname.getText().matches("[A-ï¿½][a-ï¿½]+") == false) {
 					JOptionPane.showMessageDialog(null, "Prezime nije dobro uneto","",JOptionPane.ERROR_MESSAGE);	
 				}else if(UtilityController.getInstance().validateDate(textDate.getText()) == false) {
 					JOptionPane.showMessageDialog(null, "Datum nije dobro unet","",JOptionPane.ERROR_MESSAGE);	
-				//}else if(textAddressStreet.getText().matches("[A-Ž][a-ž]+") == false) {
+				//}else if(textAddressStreet.getText().matches("[A-ï¿½][a-ï¿½]+") == false) {
 					//JOptionPane.showMessageDialog(null, "Ulica nije dobro uneto","",JOptionPane.ERROR_MESSAGE);	
 				}else if(UtilityController.getInstance().isNumber(textAddressNumber.getText()) == false) {
 					JOptionPane.showMessageDialog(null, "Broj kuce nije unet kako treba!","",JOptionPane.ERROR_MESSAGE);
 				}else if(UtilityController.getInstance().isNumber(textJmbg.getText()) == false) {
 					JOptionPane.showMessageDialog(null, "Jmbg nije dobro unet","",JOptionPane.ERROR_MESSAGE);
-				}else if(textEmail.getText().matches("[a-žA-Ž0-9.]+@[a-žA-Ž0-9.]+") == false) {
+				}else if(textEmail.getText().matches("[a-ï¿½A-ï¿½0-9.]+@[a-ï¿½A-ï¿½0-9.]+") == false) {
 					JOptionPane.showMessageDialog(null, "Email nije dobro unet","",JOptionPane.ERROR_MESSAGE);
-				//}else if(textAddressCity.getText().matches("[A-Ž][a-ž]+") == false) {
+				//}else if(textAddressCity.getText().matches("[A-ï¿½][a-ï¿½]+") == false) {
 					//JOptionPane.showMessageDialog(null, "Grad nije dobro uneto","",JOptionPane.ERROR_MESSAGE);	
 				}else if(exists){
 					JOptionPane.showMessageDialog(null, "Vec postoji zaposleni sa istim jmbg","",JOptionPane.ERROR_MESSAGE);
@@ -242,6 +243,13 @@ public class EditStaffFrame extends JDialog {
 		
 		softwares = new ArrayList<Software>();
 		softwares = selectedStaff.getSoftwares();
+		//Ukoliko taj softver vise ne postoji, radnik ne sme da ga sadrzi
+		ArrayList<Software> temporarySoftwares = new ArrayList<Software>(softwares);
+		for(Software s : temporarySoftwares) {
+			if(SoftwareLogic.getInstance().softwareExist(s.getName()) == false) {
+				softwares.remove(s);
+			}
+		}
 		lista = new DefaultListModel<String>();
 		for(Software s: softwares) {
 			lista.addElement(s.getName());

@@ -44,11 +44,19 @@ public class StaffLogic {
 		staff1.setSoftwares(softwares);
 		Staff staff2 = new Staff("Pera", "Peric", "5211232", LocalDate.now(), "lala@gmail.com", address2);
 		staff2.setSoftwares(softwares);
+		Staff staff3 = new Staff("Nebojsa", "Mrkonjic", "1222223", LocalDate.now(), "mrkonja@yahoo.com", address1);
+		staff3.setSoftwares(softwares);
+		Staff staff4 = new Staff("Sejo", "Kalac", "211111", LocalDate.now(), "kalac@gmail.com", address2);
+		staff4.setSoftwares(softwares);
 		
 		staffs.add(staff1);
 		staffs.add(staff2);
+		staffs.add(staff3);
+		staffs.add(staff4);
 		staffs2.add(staff1);
 		staffs2.add(staff2);
+		staffs2.add(staff3);
+		staffs2.add(staff4);
 	}
 	
 

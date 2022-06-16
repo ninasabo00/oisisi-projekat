@@ -33,27 +33,27 @@ public class SoftwareLogic {
 	
 	public void initRenders() {
 		Render render1 = new Render(
-				"Materijal 1, Materijal 2",
-				"Kamera 1, Kamera 2",
-				"Objekat 1, Objekat 2",
+				"Materijal 1, Materijal 11",
+				"Kamera 1, Kamera 11",
+				"Objekat 1, Objekat 11",
 				"Render 1"
 				);
 		Render render2 = new Render(
-				"Materijal 1, Materijal 2",
-				"Kamera 1, Kamera 2",
-				"Objekat 1, Objekat 2",
+				"Materijal 2, Materijal 22",
+				"Kamera 22, Kamera 22",
+				"Objekat 22, Objekat 22",
 				"Render 2"
 				);
 		Render render3 = new Render(
-				"Materijal 1, Materijal 2",
-				"Kamera 1, Kamera 2",
-				"Objekat 1, Objekat 2",
+				"Materijal 3, Materijal 33",
+				"Kamera 3, Kamera 33",
+				"Objekat 3, Objekat 33",
 				"Render 3"
 				);
 		Render render4 = new Render(
-				"Materijal 1, Materijal 2",
-				"Kamera 1, Kamera 2",
-				"Objekat 1, Objekat 2",
+				"Materijal 4, Materijal 44",
+				"Kamera 4, Kamera 44",
+				"Objekat 4, Objekat 44",
 				"Render 4"
 				);
 		renders.add(render1);
@@ -82,12 +82,17 @@ public class SoftwareLogic {
 		software2brushes.add(brushes.get(2));
 		software2brushes.add(brushes.get(3));
 		
+		ArrayList<Brush> software3brushes = new ArrayList<Brush>();
+		software3brushes.add(brushes.get(1));
+		software3brushes.add(brushes.get(3));
 		
 		Software software1 = new Software("Software 1", software1brushes, ".format1", "alat1, alat2", renders.get(0));
 		Software software2 = new Software("Software 2", software2brushes, ".format3", "alat31, alat4", renders.get(2));
-		
+		Software software3 = new Software("Software 3", software3brushes, ".format1", "alat22, alat14", renders.get(3));
+
 		softwares.add(software1);
 		softwares.add(software2);
+		softwares.add(software3);
 	}
 	
 	public ArrayList<Render> getRenders(){
@@ -172,5 +177,14 @@ public class SoftwareLogic {
 				break;
 			}
 		}
+	}
+	
+	public boolean softwareExist(String softwareName) {
+		for(Software s : this.softwares) {
+			if(s.getName().equals(softwareName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
